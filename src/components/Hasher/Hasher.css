@@ -8,7 +8,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family:Arial, Helvetica, sans-serif
+  font-family:Arial, Helvetica, sans-serif;
+  overflow: hidden;
 }
 
 .hasherCont h2{
@@ -23,12 +24,12 @@
 
 .hasherCont .field{
 border: 1px solid black;
-padding: 5px 15px;
+padding: 5px 10px;
 margin-top: 5px;
 }
-.hasherCont .hasherCont label{
+.hasherCont label{
   font-weight: 600;
-  padding-right: 10px;
+  margin-right: 10px;
 }
 .button {
    background: black;
@@ -39,20 +40,29 @@ margin-top: 5px;
    font-size: 15px;
    margin: 5px;
 }
-.hasherCont .button:hover{background: #CC5500}
+.hasherCont .button:hover{
+  background: #668099;
+  color: black;
+  cursor: pointer;
+}
 .hasherCont .showPass {width: 60px;}
 .results {
 width: 90%;
+height: 50px;
 background-color: rgba(255,255,255,.5);
 display: flex;
 padding: 5px 20px;
+align-items: center;
 justify-content: space-between;
 box-sizing: border-box;
 border: 1px solid black;
 border-radius: 4px;
+margin-top: 10px;
+overflow: hidden;
+
 }
 .hasherCont .result {
-  font-weight: 600;
+  font-size: 14px;
 }
 .hasherCont .buttonBox{
   display: flex;
@@ -60,6 +70,8 @@ border-radius: 4px;
   justify-content: center;
 }
 
-@media only screen and (min-width: 825px) {
-
+@media only screen and (min-width: 500px) {
+  .hasherCont {
+    width: 500px;
+  }
 }

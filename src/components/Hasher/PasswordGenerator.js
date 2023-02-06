@@ -47,12 +47,9 @@ export class PasswordGenerator {
 
   getPassword = (plaintext,website) => {
     plaintext = plaintext.replace(/\s/g, "");
-    if(plaintext.length < this._MIN_PASS_LENGTH){
-      throw Error `Password must be greater than ${this._MIN_PASS_LENGTH} characters without whitespace`;
+    if(plaintext.length < this._MIN_PASS_LENGTH || plaintext.length > this._MAX_PASS_LENGTH){
+      return `Phrase must be ${this._MIN_PASS_LENGTH}-${this._MAX_PASS_LENGTH} characters`;
     } 
-    else if (plaintext.length > this._MAX_PASS_LENGTH){
-      throw Error `Password must be <= ${this._MAX_PASS_LENGTH} characters`;
-    }
     for(let i = 0; i < 3; i++){
         plaintext = this._hashPassword(plaintext, website);
     }
