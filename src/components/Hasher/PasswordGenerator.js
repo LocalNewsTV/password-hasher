@@ -23,13 +23,15 @@ export class PasswordGenerator {
     this._MAX_PASS_LENGTH = MAX_PASS_LENGTH;
   }
   
-  _hashPassword = (plaintext) => {
-    const skipVal = [...plaintext].reduce((total,letter)=> total += this._stringArray.indexOf(letter), 0);
+  _hashPassword = (plaintext, website="none") => {
+    const allLetters = [];
+    allLetters.push(...plaintext+website)
+    const skipVal = allLetters.reduce((total,letter)=> total += this._stringArray.indexOf(letter), 0);
     let hashedString = '';
     for(let i = 0; i < plaintext.length; i++){
-      if(i == plaintext.length / 2){
+      if(i === plaintext.length / 2){
         hashedString += this._stringArray[(this._stringArray.indexOf(plaintext.charAt(i)) + skipVal) % this._stringArray.length].toUpperCase();
-      } else if(i % 2 == 0){
+      } else if(i % 2 === 0){
         hashedString += this._stringArray[(this._stringArray.indexOf(plaintext.charAt(i)) + skipVal * (i+2)) % this._stringArray.length];
       } else {
         hashedString += this._stringArray[(this._stringArray.indexOf(plaintext.charAt(i)) + (skipVal + (i * (i+1)))) % this._stringArray.length].toUpperCase();
@@ -43,16 +45,16 @@ export class PasswordGenerator {
     return plaintext.slice(0, half) + num + plaintext.slice(half);
   }
 
-  getPassword = (plaintext) => {
+  getPassword = (plaintext,website) => {
     plaintext = plaintext.replace(/\s/g, "");
     if(plaintext.length < this._MIN_PASS_LENGTH){
-      throw `Password must be greater than ${this._MIN_PASS_LENGTH} characters without whitespace`;
+      throw Error `Password must be greater than ${this._MIN_PASS_LENGTH} characters without whitespace`;
     } 
     else if (plaintext.length > this._MAX_PASS_LENGTH){
-      throw `Password must be <= ${this._MAX_PASS_LENGTH} characters`;
+      throw Error `Password must be <= ${this._MAX_PASS_LENGTH} characters`;
     }
     for(let i = 0; i < 3; i++){
-        plaintext = this._hashPassword(plaintext);
+        plaintext = this._hashPassword(plaintext, website);
     }
     if(!(/\d/.test(plaintext))){
       plaintext = this._addNum(plaintext);

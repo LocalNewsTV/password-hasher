@@ -1,9 +1,7 @@
 import React from 'react';
 import { Logo } from './Logo/Logo.js';
-import './Logo/Logo.css';
 import { AppNav } from './AppNav/AppNav.js';
-import './AppNav/AppNav.css';
-
+import './NavBar.css';
 
 export const NavBar = () => {
   return (
